@@ -1,0 +1,13 @@
+## Interface: 30300
+## Version: 1.0.0
+## Title: Raid System
+## Notes: Create and list ongoing raids
+## Dependencies: LibStub, Ace3
+## Author: Brannik
+
+core.lua
+OngoingRaids.lua
+MainUI.lua
+MinimapIcon.lua
+libs/LibStub/LibStub.lua
+media/raid_icon.tga
