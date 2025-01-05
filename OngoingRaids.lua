@@ -11,7 +11,7 @@ local isListening = false
 local frame = CreateFrame("Frame")
 
 local raidKeywords = {
-    "LFM", "LFG", "LF", "Looking for more", "Looking for group", "Need more", "Raid", "Group"
+    "LFM", "LFG", "LF", "Looking for more", "Need more", "Raid", "Group"
 }
 
 local dungeonNames = {
@@ -19,15 +19,20 @@ local dungeonNames = {
     ["RS"] = "Ruby Sanctum",
     ["Naxx"] = "Naxxramas",
     ["Ulduar"] = "Ulduar",
-    ["ToC"] = "Trial of the Crusader"
+    ["TOC"] = "Trial of the Crusader"
 }
 
 local dungeonIcons = {
-    ["ICC"] = "Interface\\Icons\\Achievement_Dungeon_Icecrown_IcecrownEntrance",
-    ["RS"] = "Interface\\Icons\\Achievement_Dungeon_RubySanctum",
-    ["Naxx"] = "Interface\\Icons\\Achievement_Dungeon_Naxxramas",
-    ["Ulduar"] = "Interface\\Icons\\Achievement_Dungeon_Ulduar77",
-    ["ToC"] = "Interface\\Icons\\Achievement_Dungeon_TrialoftheCrusader"
+    ["ICC"] = "Interface\\AddOns\\RaidSystem\\media\\dungeons\\ICC.blp",
+    ["RS"] = "Interface\\AddOns\\RaidSystem\\media\\dungeons\\RS.blp",
+    ["Naxx"] = "Interface\\AddOns\\RaidSystem\\media\\dungeons\\NAX.blp",
+    ["Ulduar"] = "Interface\\AddOns\\RaidSystem\\media\\dungeons\\ULD.blp",
+    ["TOC"] = "Interface\\AddOns\\RaidSystem\\media\\dungeons\\TOC.blp",
+    ["FOS"] = "Interface\\AddOns\\RaidSystem\\media\\dungeons\\FOS.blp",
+    ["POS"] = "Interface\\AddOns\\RaidSystem\\media\\dungeons\\POS.blp",
+    ["HOR"] = "Interface\\AddOns\\RaidSystem\\media\\dungeons\\HOR.blp",
+    ["VOA"] = "Interface\\AddOns\\RaidSystem\\media\\dungeons\\VOA.blp",
+    ["Unknown"] = "Interface\\Icons\\INV_Misc_QuestionMark"
 }
 
 local classColors = {
@@ -203,7 +208,7 @@ local function CreateOngoingRaidsContent(parent)
     scrollFrame:SetScrollChild(content)
 
     local totalHeight = 0
-    local columns = 3
+    local columns = 6
     local iconSize = 96  -- Three times bigger than the original size
 
     -- Add dynamic data to the ongoing raids tab content
@@ -221,7 +226,7 @@ local function CreateOngoingRaidsContent(parent)
         dungeonIcon:SetPoint("TOP", gridElement, "TOP", 0, -10)
 
         local senderText = gridElement:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-        senderText:SetPoint("TOP", dungeonIcon, "TOP", 0, -5)
+        senderText:SetPoint("TOP", dungeonIcon, "TOP", 0, -10)
         senderText:SetText(msg.coloredSender)
         senderText:SetFont("Fonts\\FRIZQT__.TTF", 14, "OUTLINE")
         senderText:SetTextColor(1, 1, 1, 1)  -- White color
@@ -232,10 +237,10 @@ local function CreateOngoingRaidsContent(parent)
             difficultyText:SetText(msg.difficulty)
             difficultyText:SetFont("Fonts\\FRIZQT__.TTF", 14, "OUTLINE")
             difficultyText:SetTextColor(1, 1, 1, 1)  -- White color
-            local bg = gridElement:CreateTexture(nil, "BACKGROUND")
-            bg:SetTexture(0, 0, 0, 0.5)  -- Semi-transparent black background
-            bg:SetPoint("CENTER", difficultyText, "CENTER", 0, 0)
-            bg:SetSize(difficultyText:GetStringWidth() + 4, difficultyText:GetStringHeight() + 2)
+            --local bg = gridElement:CreateTexture(nil, "BACKGROUND")
+            --bg:SetTexture(0, 0, 0, 0.5)  -- Semi-transparent black background
+           -- bg:SetPoint("CENTER", difficultyText, "CENTER", 0, 0)
+            --bg:SetSize(difficultyText:GetStringWidth() + 4, difficultyText:GetStringHeight() + 2)
         end
 
         local messageText = gridElement:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
@@ -243,7 +248,7 @@ local function CreateOngoingRaidsContent(parent)
         messageText:SetWidth(gridElement:GetWidth() - 20)  -- Set the width to avoid overflowing
         messageText:SetWordWrap(true)
         messageText:SetJustifyH("CENTER")  -- Align text to the center
-        messageText:SetText(string.format("%s\n|cffff8000%s|r", msg.dungeon, msg.gearScore))
+        messageText:SetText(string.format("\n|cffff8000%s|r",  msg.gearScore))
         messageText:SetFont("Fonts\\FRIZQT__.TTF", 14, "OUTLINE")
         messageText:SetTextColor(1, 1, 1, 1)  -- White color
 
@@ -284,8 +289,10 @@ end
 local function SetListening(listen)
     isListening = listen
     if listen then
+        print("registerred the events")
         RegisterChatEvents()
     else
+        print("unregisterred the events")
         UnregisterChatEvents()
     end
 end

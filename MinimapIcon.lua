@@ -21,8 +21,10 @@ local function CreateMinimapButton()
     button:SetScript("OnClick", function(self, button)
         if button == "LeftButton" then
             if MainUI:IsShown() then
+                RaidSystem_SetListening(false)
                 MainUI:Hide()
             else
+                RaidSystem_SetListening(true)
                 MainUI:Show()
             end
         end

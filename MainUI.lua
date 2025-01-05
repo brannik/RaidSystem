@@ -3,7 +3,7 @@ local AceGUI = LibStub("AceGUI-3.0")
 -- Create the MainUI frame
 local function CreateMainUI()
     local frame = CreateFrame("Frame", "RaidSystemMainUI", UIParent)
-    frame:SetSize(600, 500)
+    frame:SetSize(900, 500)
     frame:SetPoint("CENTER")
     frame:SetMovable(true)
     frame:EnableMouse(true)
@@ -60,13 +60,13 @@ local function CreateMainUI()
 
     -- Create a container for the tabs and content
     local container = CreateFrame("Frame", nil, frame)
-    container:SetSize(580, 460)
+    container:SetSize(720, 460)
     container:SetPoint("TOPLEFT", 10, -30)
 
     -- Create frames for each tab's content
     local ongoingRaidsContent = CreateFrame("Frame", "OngoingRaidsContent", container)
     ongoingRaidsContent:SetPoint("TOPLEFT", container, "TOPLEFT", 160, 0)
-    ongoingRaidsContent:SetSize(420, 460)
+    ongoingRaidsContent:SetSize(720, 460)
     ongoingRaidsContent:SetBackdrop({
         bgFile = "Interface\\AchievementFrame\\UI-Achievement-Parchment-Horizontal",
         edgeFile = "Interface\\AchievementFrame\\UI-Achievement-WoodBorder",
@@ -78,7 +78,7 @@ local function CreateMainUI()
 
     local createRaidContent = CreateFrame("Frame", "CreateRaidContent", container)
     createRaidContent:SetPoint("TOPLEFT", container, "TOPLEFT", 160, 0)
-    createRaidContent:SetSize(420, 460)
+    createRaidContent:SetSize(720, 460)
     createRaidContent:SetBackdrop({
         bgFile = "Interface\\AchievementFrame\\UI-Achievement-Parchment-Horizontal",
         edgeFile = "Interface\\AchievementFrame\\UI-Achievement-WoodBorder",
@@ -155,7 +155,7 @@ local function CreateMainUI()
 
     frame.tab1 = CreateTab(container, 1, "Ongoing Raids", ongoingRaidsContent, function()
         RaidSystem_ClearChatMessages()
-        RaidSystem_SetListening(true)
+        --RaidSystem_SetListening(true)
         RaidSystem_CreateOngoingRaidsContent(ongoingRaidsContent)
     end, function()
         RaidSystem_SetListening(false)
